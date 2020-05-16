@@ -33,3 +33,30 @@ class Solution {
     }
 }
 ```
+# Implementation 2 : Sliding Window
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s == null || s.length() == 0)
+            return 0;
+        int left = 0, right = 0;
+        int max = 1;
+        Set<Character> set = new HashSet<>();
+        
+        while(right < s.length()) {
+               if(!set.contains(s.charAt(right))){
+                   set.add(s.charAt(right++));
+                   max = Math.max(max, set.size());
+               } else {
+                   set.remove(s.charAt(left++));
+               }    
+        }
+        return max;
+    }
+    
+}
+```
+
+# References :
+1. https://leetcode.com/articles/longest-substring-without-repeating-characters
+2. https://www.youtube.com/watch?v=3IETreEybaA
