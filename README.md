@@ -53,26 +53,25 @@ class Solution {
 ```java
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        if(s == null || s.length() == 0)
-            return 0;
-        int left = 0, right = 0;
-        int max = 1;
-        Set<Character> set = new HashSet<>();
-        
-        while(right < s.length()) {
-               if(!set.contains(s.charAt(right))){
-                   set.add(s.charAt(right++));
-                   max = Math.max(max, set.size());
-               } else {
-                   set.remove(s.charAt(left++));
-               }    
-        }
-        return max;
+       if(s == null || s.length() == 0)
+         return 0;
+       int i = 0, j = 0, max = 0;
+       Set<Character> set = new HashSet<>();
+       while(i < s.length()) {
+         char ch = s.charAt(i);
+         while(set.contains(ch)) {
+            set.remove(s.charAt(j));
+            j++;
+         }
+         set.add(ch);
+         max = Math.max(max, i-j+1);
+         i++;
+       }
+       return max;  
     }
-    
 }
 ```
 
 # References :
 1. https://leetcode.com/articles/longest-substring-without-repeating-characters
-2. https://www.youtube.com/watch?v=3IETreEybaA
+2. https://www.youtube.com/watch?v=4i6-9IzQHwo
