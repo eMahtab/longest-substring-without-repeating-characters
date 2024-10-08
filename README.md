@@ -22,7 +22,7 @@ Output: 3
 Explanation: The answer is "wke", with the length of 3. 
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ```
-# Implementation 1 : Naive
+# Implementation 1 : Naive O(n^3)
 ```java
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -49,7 +49,7 @@ class Solution {
     }
 }
 ```
-# Implementation 2 : Sliding Window
+# Implementation 2 : Sliding Window  O(n)
 ```java
 class Solution {
     public int lengthOfLongestSubstring(String s) {
