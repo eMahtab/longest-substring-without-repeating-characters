@@ -26,31 +26,26 @@ Explanation: The answer is "wke", with the length of 3.
 ```java
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        if(s == null || s.length() == 0)
-            return 0;
-        int maxSubstring = 1;
+        int longest = 0;
         for(int i = 0; i < s.length(); i++) {
-            for(int j = i + 1; j <= s.length(); j++) {
-                String substr = s.substring(i,j);
-                if(isUnique(substr)) {
-                    maxSubstring = Math.max(maxSubstring, j-i);
-                } else {
-                    break;
-                }  
+            for(int j = i+1; j < s.length() + 1; j++) {
+                String substr = s.substring(i, j);
+                longest = Math.max(longest, check(substr));
             }
         }
-        return maxSubstring;
+        return longest;
     }
-    
-    private boolean isUnique(String s) {
+
+    private int check(String str) {
         Set<Character> set = new HashSet<>();
-        for(int i = 0; i < s.length(); i++) {
-            if(!set.contains(s.charAt(i)))
-                set.add(s.charAt(i));
-            else
-                return false;
+        int length = 0;
+        for(char ch : str.toCharArray()) {
+            if(set.contains(ch))
+              return 0;
+            length++;
+            set.add(ch);  
         }
-        return true;
+        return length;
     }
 }
 ```
