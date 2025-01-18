@@ -41,7 +41,7 @@ class Solution {
         int length = 0;
         for(char ch : str.toCharArray()) {
             if(set.contains(ch))
-              return 0;
+              return length;
             length++;
             set.add(ch);  
         }
