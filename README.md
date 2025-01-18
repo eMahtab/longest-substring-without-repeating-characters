@@ -54,7 +54,7 @@ class Solution {
 
 2. But if we are at a character `ch` which is already present in the hashset, then it means that current character `ch` is the repeatation of a `previous occurrence` of the same character `ch`, In this case we keep removing elements in the hashset from the left and increment left pointer, we do this until we get rid of the character `ch` from the hashset. By doing this we guarantee that substring between left and right pointer does not contain any duplicate characters. And since we remove the earlier occurrence of `ch` from the hashset, we can count the current `ch` as distinct, so we add it to the hashset.  
 
-# Implementation 2 : Sliding Window  O(n)
+# Implementation 2 : Sliding Window, Using HashSet,  O(n)
 ```java
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -73,6 +73,35 @@ class Solution {
          i++;
        }
        return max;  
+    }
+}
+```
+## Implementation 2a : Sliding Window, Using HashMap, O(n)
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s.length() < 2)
+           return s.length();
+
+        Map<Character,Integer> map = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        int longestSubstringLength = 1;
+        while(right < s.length()) {
+            char ch = s.charAt(right);
+            if(map.containsKey(ch)) {
+                while(map.containsKey(ch)) {
+                    char charAtLeft = s.charAt(left);
+                    map.remove(charAtLeft);
+                    left++;
+                }
+            }
+            map.put(ch, right);
+            int substringLength = right - left + 1;
+            longestSubstringLength = Math.max(longestSubstringLength, substringLength);
+            right++;
+        }   
+        return longestSubstringLength;
     }
 }
 ```
